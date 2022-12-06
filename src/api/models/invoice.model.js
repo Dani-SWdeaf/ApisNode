@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 const InvoiceSchema = new Schema({
     item: {
         type: String,
@@ -25,4 +25,4 @@ const InvoiceSchema = new Schema({
     }
 });
 
-export default mongoose.model('Invoice', InvoiceSchema)
+export default mongoose.model('Invoices', InvoiceSchema)
