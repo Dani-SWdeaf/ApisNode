@@ -3,12 +3,18 @@ import HttpStatus from 'http-status-codes';
 import Invoice from '../models/invoice.model';
 
 export default {
-    findAll(req, res, next) {
-        Invoice.find()
+    findAll(req, res) {
+        const { page = 1, perPage = 10 } = req.query;
+        const options = {
+            page: parseInt(page + 10),
+            limit: parseInt(perPage + 10),
+        };
+        console.log(options);
+        Invoice.paginate({}, options)
         .then(invoices => res.json(invoices))
         .catch(err => res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(err));
     },
-    create(req, res, next) {
+    create(req, res) {
 
         const schema = Joi.object().keys({
             item: Joi.string().required(),
